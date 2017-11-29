@@ -1,0 +1,419 @@
+/* 公共样式 */
+body {
+    font: 14px '幼圆';
+}
+
+div, p, h1, h2, h3, h4, h5, h6, span, ul, dl, ol, input, img, {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+i, em {
+    font-style: normal;
+}
+
+ul, dl, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    vertical-align: middle;
+    border: 0 none;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+/* 第一屏 */
+.section1 {
+    perspective: 9999px;
+}
+
+.slide_pic {
+    height: 100%;
+}
+
+.slide_pic img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+
+.slide_pic img:first-of-type {
+    display: block;
+}
+
+/* 下箭头 */
+.next a {
+    position: fixed;
+    width: 30px; 
+    height: 30px;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    cursor: default;
+}
+
+.next a i {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    opacity: 1;
+    font-size: 20px;
+    animation: next_a 1.6s linear infinite;
+}
+
+@keyframes next_a{
+    50% {
+        top: 14px;
+        opacity: 0.2;
+    }
+}
+
+/* 问候 */
+.greet {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    background-color: rgba(67, 74, 84, 0.2);
+    text-align: center;
+    line-height: 26px;
+    width: 150px;
+    display: none;
+    border-radius: 0 0 10px 10px;
+    color: #fff;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+}
+
+.greet p {
+    margin: 0;
+}
+
+    /* 个人信息 */
+.my_infos {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    background-color: rgba(67, 74, 84, .2);
+    z-index: 99;
+    left: 50%;
+    margin-left: -250px;
+    top: 300px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: default;
+    padding: 10px;
+    box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transform: rotateY(0) rotateX(0);
+    /* 执行时间要尽可能短一些, 不然会因为来不及而出现卡顿  (现在能力有限, 有待用更好方式解决, 毕竟执行慢一点好看些)*/
+    transition: transform 0.01s linear; 
+}
+
+.my_infos .my_photo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    transform: translateZ(20px);
+}
+
+.my_infos .sentence p {
+    color: #fff;
+    transform-style: preserve-3d;
+    transform: translateZ(20px);
+    padding: 10px 5px;
+    line-height: 26px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+}
+
+.my_infos .intro {
+    margin-top: 30px;
+}
+
+.my_infos .intro p {
+    line-height: 30px;
+    color: #fff;
+    transform-style: preserve-3d;
+    transform: translateZ(20px);
+}
+
+/* .my_infos .pause {
+    position: absolute;
+    height: 80px;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.3);
+    color: brown;
+    font-weight: bold;
+    display: none;
+}
+
+.my_infos .pause img {
+    border-radius: 10px 0 0 10px;
+    opacity: 0.5;
+}
+
+.my_infos .pause span {
+    padding: 13px 10px;
+    line-height: 18px;
+} */
+
+/* 第二屏 */
+.section2 .title {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+}
+
+.section2 .title h3 {
+    text-align: center;
+    margin: 0;
+    line-height: 30px;
+    color: #fff;
+    font-size: 30px;
+}
+
+.section2 .title h3:last-of-type {
+    font-size: 22px;
+}
+
+/* 第三屏 */
+.section3 {
+    background: url("../public/images/sky.jpg") no-repeat center / 100% 100%;
+    overflow: hidden;
+}
+
+.section3 .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .2);
+    color: #fff;
+}
+
+.section3 .title h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.section3 .skills {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 400px;
+}
+
+.section3 ul {
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.section3 ul li {
+    float: left;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    margin-right: 100px;
+    color: #fff;
+    font-size: 12px;
+    position: relative;
+    transform: scale(1);
+    transition: transform 0.2s linear;
+    left: 0;
+    top: 0;
+}
+
+.section3 ul li:hover {
+    transform: scale(1.1);
+}
+
+.section3 ul li p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -40px;
+    margin: 0;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.section3 ul li:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.section3 ul li:nth-of-type(n + 4) {
+    margin-top: 70px;
+}
+
+.section3 ul li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.section3 ul li canvas {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+}
+
+.section3 .line {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 5px 5px rgba(255, 255, 255, .3);
+    position: absolute;
+    top: -5px;
+}
+
+.section3 .line.animate {
+    animation: star-ani 3s linear infinite;
+}
+
+.section3 .line::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 0px solid #fff;
+    border-width: 2px 100px;
+    border-color: transparent transparent transparent rgba(255, 255, 255, .2);
+    position: absolute;
+    left: 4px;
+    top: 0;
+    /* 调整尾巴方向 */
+    transform: rotateZ(-45deg) translate(-1px) translateY(-1px);
+    transform-origin: 0 0;
+}
+
+@keyframes star-ani {  
+    0% {
+        opacity: 1;
+        transform: scale(0) rotate(0) translate3d(0, 0, 0);  
+    }   
+    100% {
+        opacity: 0;
+        transform: scale(1) rotate(0) translate3d(-700px, 700px, 0);
+    }  
+} 
+
+/* 第六屏 */
+.section6 .title {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-bottom: 1px solid #fff;
+}
+
+.section6 .title h3 {
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+.section6 .words {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+.section6 .words .content p {
+    margin: 0;
+    line-height: 30px;
+}
+
+.section6 .words .left-top {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #fff;
+    left: 0;
+    top: 0;
+    border-color: #fff transparent transparent #fff;
+}
+
+.section6 .words .right-bottom {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #fff;
+    right: 0;
+    bottom: 0;
+    border-color: transparent #fff #fff transparent;
+}
+
+.section6 .others {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 75%;
+}
+
+.section6 .others ul {
+    margin: 0;
+    padding: 0;
+}
+
+.section6 .others li {
+    float: left;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.section6 .others a {
+    display: block;
+    padding: 8px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.section6 .others i {
+    font-size: 26px;
+    color: #fff;
+}
