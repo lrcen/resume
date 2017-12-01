@@ -29,6 +29,13 @@ $(function() {
         afterLoad: function(anchor, index) { //当每滚动到一个屏时
             // count = 0;
             // move_flag = true;
+
+            if(index === 2) {
+                $('h1').addClass('animation');
+            }else {
+                $('h1').removeClass('animation');
+            }
+
             //第三屏
             if(index === 3) {
                 // li边框颜色
@@ -77,7 +84,7 @@ $(function() {
                     }, 10);
                 });
 
-                // 设置一个计时器， 每隔5s钟, 出现星星
+                // 设置一个计时器， 每隔3s钟, 出现星星
                 starId = setInterval(function() {
                     var left = Math.random() * 500 + 1000;
                     $('.section3 .line').css('left', left).toggleClass('animate');
@@ -149,6 +156,20 @@ $(function() {
     });
 
 
+    // 第二屏
+    $('.section2 .infos span i').each(function(index, value) {
+        // 给一个top值, 避免和原来的i重合
+        $(value).clone().css('top', 100).appendTo($('.section2 .infos span').eq(index));  // 遍历每一个i并克隆, 然后隐藏的追加给对应的span标签, 否则会给每个span追加所有i
+    });
+
+    $('.section2 .infos span').on('mouseenter', function() {
+        $(this).children('i').stop(true, false).animate({'margin-top': -100}, 400, 'linear');
+    })
+
+    $('.section2 .infos span').on('mouseleave', function() {
+        $(this).children('i').stop(true, false).animate({'margin-top': 0}, 400, 'linear');
+    })
+
     // 第六屏
     var othersColor = ['rgb(36, 41, 46)', 'rgb(15, 136, 235)', 'rgb(230, 22, 45)'];
     // 改变hover颜色
@@ -160,4 +181,65 @@ $(function() {
         $(this).find('i').animate({'color': '#fff'}).parent().animate({'border-color': '#fff'});
     });
     
+
+    // 菜单 播放 / 暂停
+    var toggleFlag = clickFlag = true; // toggleFlag 用于控制进入哪个判断条件   clickFlag用于控制点击触发,防止一直恶意点击
+    $('.menus .button').on('click', function() {
+        if(!clickFlag) return false;
+        if(toggleFlag && clickFlag) { // 二者都为true, i收缩 li展开, 并且在所有动画执行结束前, 阻止后续的点击事件触发
+            clickFlag = false;
+            $(this).children('i').each(function(index, value) {
+                // 依次所有的i "收缩"
+                $(this).stop(true, false).delay(400 * index).animate({'width': 0}, 400, 'linear');
+            });
+            // 依次所有的li"展开"
+            $(this).siblings('.lists').find('li').each(function(index, value) {
+                $(this).stop(true, false).delay(400 * index).animate({'left': 0}, 400, 'linear', function() {
+                    if(index === 2) {
+                        toggleFlag = false;
+                        clickFlag = true; // 执行完后, 允许点击事件触发
+                    }
+                });
+            });
+        }else if(!toggleFlag && clickFlag){ // 同理
+            clickFlag = false;
+            // 依次所有的li"收缩"
+            for(let i = $(this).siblings('.lists').find('li').length - 1; i >= 0; i--) {
+                $('.menus .lists li').eq(i).stop(true, false).delay(400 * (2 - i)).animate({'left': '-120%'}, 400, 'linear');
+            }
+            // $(this).siblings('.lists').find('li').each(function(index, value) {
+            // });
+
+            for(let i = $(this).children('i').length - 1; i>= 0; i--) {
+                // 依次所有的i "展开"
+                // 要展开到的长度不一样, 分别设置
+                if(i === 0) {
+                    $('.menus .button i').eq(i).stop(true, false).delay(400 * (2 - i)).animate({'width': 10}, 400, 'linear', function() {
+                        toggleFlag = true;
+                        clickFlag = true;
+                    });
+                }else if(i === 1) {
+                    $('.menus .button i').eq(i).stop(true, false).delay(400 * (2 - i)).animate({'width': 20}, 400, 'linear');
+                }else {
+                    $('.menus .button i').eq(i).stop(true, false).delay(400 * (2 - i)).animate({'width': 15}, 400, 'linear');
+                }
+            }
+            // $(this).children('i').each(function(index, value) {
+                
+            // });
+        }
+    })
+
+    $('.menus .lists ul li:first-of-type a').on('click', function() {
+        $(this).toggleClass('animation').toggleClass('icon-bofang1').toggleClass('icon-zanting');
+        if($(this).hasClass('icon-zanting')) {
+            $('audio')[0].play();
+        }else {
+            $('audio')[0].pause();
+        }
+    })
+
+    $('.menus .lists ul li:last-of-type a').on('click', function() {
+        $('.greet p').html('我的邮箱是 :<br /><strong>lrcenzg@163.com</strong><br />您也可以在第一屏的头像下方找到它').stop(true, false).slideDown(400).delay(10000).slideUp(400);
+    })
 });
