@@ -23,8 +23,9 @@ $(function() {
 
     var contextArr = null; // 定义一个保存context的数组, 不能定义在afterLoad里面, 不然每次加载新的屏就会重置
     var starId = null; // 星星计时器id
+    var loadid = null; // 加载计时器id;
     $("#fullpage").fullpage({
-        sectionsColor: ["rgb(28,203,174)", "rgb(28,120,135)", "rgb(150,239,230)", "rgb(136,199,190)", "rgb(190,232,231)", "rgb(190,232,231)"], //设置每个屏的背景色
+        sectionsColor: ["rgb(28,203,174)", "rgb(28,120,135)", "rgb(150,239,230)", "rgb(136,199,190)", "rgb(190,232,231)", "rgb(28,120,135)"], //设置每个屏的背景色
         navigation: true, //显示导航点
         afterLoad: function(anchor, index) { //当每滚动到一个屏时
             // count = 0;
@@ -43,12 +44,12 @@ $(function() {
                 // 画布画笔颜色
                 var cavColorArr = ['rgb(254, 67, 101)', 'rgb(252, 157, 154)', 'rgb(249, 205, 173)', 'rgb(200, 200, 169)', 'rgb(131, 175, 155)', 'rgb(130, 57, 53)'];
                 // 百分比
-                var percentArr = [0.7, 0.7, 0.75, 0.8, 0.8, 0.75];
+                var percentArr = [0.7, 0.75, 0.7, 0.8, 0.8, 0.6];
 
                 contextArr = [];
             
                 $('.section3 ul li').each(function(index, value) {
-                    $(value).css('border', '4px solid ' + colorArr[index]).attr('draggable', true);
+                    $(value).css('border', '4px solid ' + colorArr[index]);
                 })
             
                 var canvas_all = $('.section3 li canvas');
@@ -103,8 +104,57 @@ $(function() {
                 clearInterval(starId);
             }
 
+            //第四屏
+            if(index === 4) {
+                $('.highlight').addClass('animation'); // 当为第四屏时, 添加animation类
+                var count = 0;
+                loadid = setInterval(function () {
+                    count++;
+                    if(count % 30 === 0) {
+                        $('.section4 .road p span').html($('.section4 .road > p span').html() + '.');
+                    }
+                    if(count === 120) {
+                        $('.section4 .road > p span').html('');
+                        count = 0;
+                    }
+            
+                    // 如果高亮长度达到20%时, 等待 动画 完成后继续
+                    if($('.section4 .road .highlight').width() == $('.section4 .road').width() * 0.2) {
+                        $('.section4 .experience .road .exper-1').addClass('animation').children('p').addClass('animation');
+                    }
+                    
+                    if($('.section4 .road .highlight').width() == $('.section4 .road').width() * 0.8) {
+                        $('.section4 .experience .road .exper-2').addClass('animation').children('p').addClass('animation');
+                    }
+            
+                    if($('.section4 .road .highlight').width() === $('.section4 .road').width()) { // 当'加载'完成时, 清空计时器
+                        clearInterval(loadid);
+                        $('.section4 .road > p').html('to be continue');
+                    }
+                }, 16.7);
+            }else {
+                clearInterval(loadid);
+                $('.section4 .road > p span').html('');
+            }
+
+            //第六屏
             if(index === 6) {
                 $('.next a i').removeClass('icon-xia');
+                $('.section6 .left-top, .section6 .right-bottom').addClass('animation');
+
+                // 轮播字
+                var numIndex = 0;
+                setInterval(function() {
+                    numIndex++;
+                    $('.section6 .title ul').animate({'margin-top': - numIndex * 30}, 600, 'linear');
+                    if(numIndex === 4) { // 这里判断的是 下标 ,  也可以使用判断运行距离
+                        setTimeout(function() {
+                            numIndex = 0;
+                            $('.section6 .title ul').css("margin-top", 0);
+
+                        }, 1000);
+                    }
+                }, 3000);
             }else {
                 $('.next a i').addClass('icon-xia');
             }
@@ -171,14 +221,18 @@ $(function() {
     })
 
     // 第六屏
-    var othersColor = ['rgb(36, 41, 46)', 'rgb(15, 136, 235)', 'rgb(230, 22, 45)'];
+    var othersColor = ['rgb(36, 41, 46)', '#62b900', '#15b5e9', 'rgb(15, 136, 235)', 'rgb(230, 22, 45)'];
     // 改变hover颜色
     $('.section6 .others li').on("mouseenter", function() {
         // 根据当前鼠标所在的li的index, 获取对应的数组中的颜色
         $(this).find('i').stop(true, true).animate({'color': othersColor[$(this).index()]}, 200, 'linear').parent().stop(true, true).animate({'border-color': othersColor[$(this).index()]}, 200, 'linear');
+        $(this).find('span').stop(true, true).animate({'background-color': othersColor[$(this).index()], 'top': -30, 'border-color': othersColor[$(this).index()], 'opacity': 1}, 400, 'linear');
+        $(this).find('span em').animate({'border-top-color': othersColor[$(this).index()], 'opacity': 1}, 400, 'linear');
     });
     $('.section6 .others li').on("mouseleave", function() {
         $(this).find('i').animate({'color': '#fff'}).parent().animate({'border-color': '#fff'});
+        $(this).find('span').stop(true, true).animate({'background-color': '#fff', 'top': -50, 'border-color': '#fff', 'opacity': 0}, 400, 'linear');
+        $(this).find('span em').stop(true, true).animate({'border-top-color': '#fff', 'opacity': 0}, 400, 'linear');
     });
     
 
@@ -241,5 +295,6 @@ $(function() {
 
     $('.menus .lists ul li:last-of-type a').on('click', function() {
         $('.greet p').html('我的邮箱是 :<br /><strong>lrcenzg@163.com</strong><br />您也可以在第一屏的头像下方找到它').stop(true, false).slideDown(400).delay(10000).slideUp(400);
-    })
+    });
+
 });

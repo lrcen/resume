@@ -476,72 +476,311 @@ img {
     }  
 } 
 
-/* 第六屏 */
-.section6 .title {
+/* 第四屏 */
+.section4 .title {
     position: absolute;
-    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 20px;
-    border-bottom: 1px solid #fff;
+    top: 150px;
+    color: #fff;
 }
 
-.section6 .title h3 {
-    color: #fff;
-    font-size: 30px;
-    text-align: center;
-    margin: 0;
+.section4 .experience {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 500px;
 }
+
+.section4 .experience .road {
+    position: absolute;
+    width: 1000px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    left: 50%;
+    margin-left: -500px;
+    top: 50%;
+    border-radius: 2px;
+    text-align: right;
+}
+
+.section4 .experience .road .highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #000;
+    transition: width 10s linear;
+}
+
+.section4 .experience .road .highlight.animation {
+    width: 100%;
+}
+
+.section4 .experience .road p span {
+    display: inline-block;
+    text-align: left;
+    width: 20px;
+}
+
+.section4 .experience .road .exper-1 {
+    position: absolute;
+    width: 5px;
+    height: 100px;
+    background-color: #000;
+    top: -250px;
+    left: 20%;
+    opacity: 0;
+    transition: all 1s linear;
+    perspective: 1500px;
+}
+
+.section4 .experience .road .exper-1.animation {
+    top: -150px;
+    opacity: 1;
+}
+
+.section4 .experience .road .exper-1 p {
+    position: absolute;
+    left: 10px;
+    white-space: nowrap;
+    text-align: left;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    top: 50%;
+    transform: translateY(-50%) rotateY(-90deg);
+    transform-origin: left;
+    transform-style: preserve-3d;
+}
+
+.section4 .experience .road .exper-1 p.animation {
+    animation: exper-1-ani 2s linear 1s forwards;
+}
+
+@keyframes exper-1-ani {
+    70% {
+        transform: translateY(-50%) rotateY(20deg);
+    }
+    80% {
+        transform: translateY(-50%) rotateY(-10deg);
+    }
+    90% {
+        transform: translateY(-50%) rotateY(5deg);
+    }
+    100% {
+        transform: translateY(-50%) rotateY(0deg);
+    }
+}
+
+.section4 .experience .road .exper-2 {
+    position: absolute;
+    width: 5px;
+    height: 100px;
+    background-color: #000;
+    top: 160px;
+    left: 80%;
+    opacity: 0;
+    transition: all 1s linear;
+    perspective: 1500px;
+}
+
+.section4 .experience .road .exper-2.animation {
+    top: 80px;
+    opacity: 1;
+}
+
+.section4 .experience .road .exper-2 p {
+    position: absolute;
+    right: 10px;
+    white-space: nowrap;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    top: 50%;
+    transform-origin: right;
+    transform: translateY(-50%) rotateY(90deg);
+    transition: transform 1s linear 1s;
+    transform-style: preserve-3d;
+}
+
+.section4 .experience .road .exper-2 p.animation {
+    animation: exper-2-ani 2s linear 1s forwards;
+}
+
+@keyframes exper-2-ani {
+    70% {
+        transform: translateY(-50%) rotateY(-20deg);
+    }
+    80% {
+        transform: translateY(-50%) rotateY(10deg);
+    }
+    90% {
+        transform: translateY(-50%) rotateY(-5deg);
+    }
+    100% {
+        transform: translateY(-50%) rotateY(0deg);
+    }
+}
+
+/* 第六屏 */
 
 .section6 .words {
     position: absolute;
     left: 50%;
     top: 25%;
     transform: translateX(-50%);
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 450px;
     padding: 20px;
     text-align: center;
+}
+
+.section6 .words .content {
+    padding-top: 40px;
+}
+
+.section6 .words .content .title {
+    position: relative;
+    font-weight: normal;
+    font-size: 20px;
+    height: 30px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.section6 .words .content .title div {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+
+.section6 .words .content .title i {
+    width: 1px;
+    height: 14px;
+    background-color: #333;
+    margin: 9px 15px 0;
+}
+
+.section6 .words .content .title ul {
+    margin: 0;
+    padding: 0;
+}
+
+.section6 .words .content .title ul li {
+    height: 30px;
+    line-height: 30px;
 }
 
 .section6 .words .content p {
     margin: 0;
     line-height: 30px;
+    font-size: 16px;
 }
 
 .section6 .words .left-top {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 1px solid #fff;
+    width: 150px;
+    height: 150px;
     left: 0;
     top: 0;
-    border-color: #fff transparent transparent #fff;
+}
+
+.section6 .words .left-top::after,
+.section6 .words .left-top::before {
+    position: absolute;
+    content: "";
+    transition: all 1s linear;
+}
+
+.section6 .words .left-top::before {
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: -50px;
+    background-color: #fff;
+}
+
+.section6 .words .left-top.animation::before {
+    top: 0;
+    left: 0px;
+}
+
+.section6 .words .left-top::after {
+    width: 2px;
+    height: 100%;
+    top: 50px;
+    left: 0px;
+    background-color: #fff;
+}
+
+.section6 .words .left-top.animation::after {
+    top: 0px;
+    left: 0px;
 }
 
 .section6 .words .right-bottom {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 1px solid #fff;
+    width: 150px;
+    height: 150px;
     right: 0;
     bottom: 0;
-    border-color: transparent #fff #fff transparent;
+}
+
+.section6 .words .right-bottom::after,
+.section6 .words .right-bottom::before {
+    position: absolute;
+    content: "";
+    transition: all 1s linear;
+}
+
+.section6 .words .right-bottom::before {
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    right: -50px;
+    background-color: #fff;
+}
+
+.section6 .words .right-bottom.animation::before {
+    bottom: 0;
+    right: 0px;
+}
+
+.section6 .words .right-bottom::after {
+    width: 2px;
+    height: 100%;
+    bottom: 50px;
+    right: 0px;
+    background-color: #fff;
+}
+
+.section6 .words .right-bottom.animation::after {
+    bottom: 0px;
+    right: 0px;
 }
 
 .section6 .others {
     position: absolute;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
-    top: 75%;
+    bottom: 8%;
 }
 
 .section6 .others ul {
     margin: 0;
     padding: 0;
+    padding-left: 70px;
 }
 
 .section6 .others li {
+    position: relative;
     float: left;
     border-radius: 50%;
     margin-right: 10px;
@@ -559,6 +798,69 @@ img {
     color: #fff;
 }
 
+.section6 .others li span {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #fff;
+    top: -50px;
+    color: #fff;
+    line-height: 30px;
+    text-align: center;
+    opacity: 0;
+}
+
+.section6 .others li span em {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: #fff;
+    opacity: 0;
+}
+
+/* 我的简历 */
+.footer {
+    position: fixed;
+    left: 1%;
+    bottom: 2%;
+    font-size: 14px;
+    width: 150px;
+    height: 20px;
+    line-height: 20px;
+    cursor: default;
+    z-index: 1000;
+    color: #fff;
+}
+
+.footer p {
+    margin: 0;
+    position: absolute;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    top: 0;
+    transition: all 0.3s linear;
+}
+
+.footer p:last-of-type {
+    opacity: 0;
+}
+
+.footer:hover p:last-of-type {
+    opacity: 0.7;
+    top: 8px;
+}
+
+.footer:hover p:first-of-type {
+    top: -8px;
+}
 
 /* 菜单组件 */
 .menus {
